@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
     },
     telephone: {
       type: String,
-      required: [true, 'telephone is required']
+      required: [true, 'telephone is required'],
     },
     city: {
       type: String,
@@ -46,6 +46,15 @@ const userSchema = new mongoose.Schema(
     postcode: {
       type: String,
       required: [true, 'postcode is required'],
+    },
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    userType: {
+      type: String,
+      default: "member",
+      enum: ['member', 'admin', 'merchant'],
     },
   },
   { timestamps: true }
