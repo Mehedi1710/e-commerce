@@ -21,4 +21,16 @@ const category = async (req, res, next) => {
   }
 };
 
-module.exports = category;
+const getCategory = async (req, res, next) => {
+  try {
+    const category = await Category.find({}).populate("subCategory");
+    res.status(200).json({
+      message: 'Category get Successfully Done!',
+      payload: { category },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { category, getCategory };

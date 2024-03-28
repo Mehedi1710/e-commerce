@@ -3,6 +3,6 @@ const createMerchant = require('../controllers/MerchantController');
 
 const merchantHelper = express.Router();
 
-merchantHelper.post('/create-category', createMerchant)
+merchantHelper.post('/becomemerchant/:id', createMerchant);
 
 module.exports = merchantHelper;

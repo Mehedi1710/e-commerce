@@ -1,5 +1,6 @@
 const createHttpError = require('http-errors');
 const Category = require('../../models/categoryModel');
+const SubCategory = require('../../models/subCategorySchema');
 
 const categoryStatus = async (req, res, next) => {
   try {
@@ -35,5 +36,39 @@ const categoryStatus = async (req, res, next) => {
     next(error);
   }
 };
+const subCategoryStatus = async (req, res, next) => {
+  try {
+    const { name, status } = req.body;
 
-module.exports = categoryStatus;
+    const category = await SubCategory.findOne({name});
+    if(!category) {
+        throw createHttpError(404, 'SubCategory not found');
+    }
+
+    if (status == 'waiting' || status == 'rejected') {
+      const user = await SubCategory.findOneAndUpdate(
+        { name },
+        { $set: { isActive: false, status: status}},
+        {new: true}
+      );
+      res.status(200).json({
+        message: "SubCategory update successfully done",
+        payload: {user}
+      });
+    } else if(status == "approved") {
+        const user = await SubCategory.findOneAndUpdate(
+            { name },
+            { $set: { isActive: true, status: status}},
+            {new: true}
+          );
+          res.status(200).json({
+            message: "SubCategory update successfully done",
+            payload: {user}
+          });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {categoryStatus, subCategoryStatus};

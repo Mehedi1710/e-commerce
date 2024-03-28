@@ -32,13 +32,24 @@ const subCategory = async (req, res, next) => {
     console.log('Subcategory added to category successfully');
 
     res.status(200).json({
-      message: 'Category create Successfully done',
+      message: 'SubCategory create Successfully done',
         payload: { categoryList },
-        success: 'Subcategory added to category successfully'
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = subCategory;
+
+const getSubCategory = async (req, res, next) => {
+  try {
+    const subCategory = await SubCategory.find({});
+    res.status(200).json({
+      message: 'Category get Successfully Done!',
+      payload: { subCategory },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = {subCategory, getSubCategory};

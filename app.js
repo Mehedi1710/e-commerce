@@ -2,6 +2,7 @@ const express = require('express');
 const categoryRouter = require('./routers/categoryRouter');
 const userRouter = require('./routers/userRouter');
 const merchantRouter = require('./routers/merchantRouter');
+const createHttpError = require('http-errors');
 
 
 const app = express();
@@ -16,7 +17,7 @@ app.use('/api/v1', merchantRouter);
 
 // Client Error handling
 app.use((req, res, next) => {
-    next(createError(404, 'route not found'));
+    next(createHttpError(404, 'route not found'));
   });
 
 
