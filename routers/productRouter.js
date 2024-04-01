@@ -1,9 +1,10 @@
 const express = require('express');
 const categoryHelper = require('../helpers/categoryHelper');
+const merchantHelper = require('../helpers/merchantHelper');
 
-const categoryRouter = express.Router();
+const productRouter = express.Router();
 
-categoryRouter.use('/category', categoryHelper)
+productRouter.use('/product', merchantHelper);
 
 
-module.exports = categoryRouter;
+module.exports = productRouter;

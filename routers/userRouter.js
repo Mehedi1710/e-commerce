@@ -1,5 +1,5 @@
 const express = require('express');
-const userHelper = require('../helpers/userHelper');
+const userHelper = require('../middlewares/userHelper');
 
 const userRouter = express.Router();
 

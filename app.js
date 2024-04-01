@@ -3,6 +3,7 @@ const categoryRouter = require('./routers/categoryRouter');
 const userRouter = require('./routers/userRouter');
 const merchantRouter = require('./routers/merchantRouter');
 const createHttpError = require('http-errors');
+const productRouter = require('./routers/productRouter');
 
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true}));
 app.use('/api/v1', categoryRouter);
 app.use('/api/v1', userRouter);
 app.use('/api/v1', merchantRouter);
+app.use('/api/v1', productRouter);
 
 
 // Client Error handling
