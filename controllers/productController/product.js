@@ -1,22 +1,26 @@
 const Product = require('../../models/productModel');
 const cloudinary = require('../../config/cloudinary');
+const createHttpError = require('http-errors');
+const Store = require('../../models/MerchantSchema');
+var QRCode = require('qrcode');
 
 const createProduct = async (req, res, next) => {
   try {
-    const { name, description } = req.body;
-    const product = { name, description };
-    const image = req.file?.path;
-    if (image && image.size > 1024 * 1024 * 2) {
-      throw createError(400, 'Image file to large. It must be less than 2 mb');
+    const { name, description, store } = req.body;
+    const findStore = await Store.findOne({_id:store});
+
+    const product = { name, description, store };
+
+    const productExists = await Product.findOne({ name });
+    if (productExists) {
+      throw createHttpError(400, 'Product already exists');
     }
 
-    if (image) {
-      const response = await cloudinary.uploader.upload(image, {
-        folder: 'my/folder',
-      });
-      product.image = response.secure_url;
-    }
     const pro = await Product.create(product);
+
+    findStore.products.push(pro);
+    await findStore.save();
+
     res.status(200).json({
       message: 'Product create successfully done',
       payload: { pro },
@@ -26,4 +30,16 @@ const createProduct = async (req, res, next) => {
   }
 };
 
-module.exports = createProduct;
+const findProduct = async(req, res, next) => {
+  try {
+    // const product = await Product.find({}).populate('variants');
+    // res.send(product);
+    QRCode.toString('I am a pony!',{type:'terminal'}, function (err, url) {
+      console.log(url)
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {createProduct, findProduct};

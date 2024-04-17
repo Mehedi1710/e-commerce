@@ -4,9 +4,7 @@ const Store = require('../../models/MerchantSchema');
 const createMerchant = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
-    const { storeName, officialEmail, officialPhone, address, products } =
-      req.body;
+    const { storeName, officialEmail, officialPhone, address, products } = req.body;
 
     const productExists = await Store.findOne({ storeName });
     if (productExists) {

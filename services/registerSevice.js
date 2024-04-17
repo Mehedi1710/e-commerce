@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const appPassword = 'mvog ugwn srmj xuzf';
 const username = 'mh1710341714@gmail.com';
 
-const registerService = async (email, token) => {
+const registerService = async (email, token, otp) => {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -17,7 +17,7 @@ const registerService = async (email, token) => {
         from: 'Apple.inc',
         to: email, // list of receivers
         subject: 'Hello ✔', // Subject line
-        html: `<b>Hello world?</b>. Please click this token:${token} `, // html body
+        html: `<b>Hello world?</b>. Please click this token:${token}. And this is your OTP CODE:${otp} `, // html body
       });
 };
 

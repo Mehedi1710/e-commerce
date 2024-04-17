@@ -5,18 +5,18 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        default: 'public/images'
-    },
     description:{
         type: String,
         required: true
     },
     store: {
+        type: String,
+        required: true
+    },
+    variants: [{
         type: mongoose.Types.ObjectId,
-        ref: "Store"
-    }
+        ref: "Variants"
+    }]
 }, {timestamps: true});
 
 const Product = mongoose.model('ProductList', productSchema);
