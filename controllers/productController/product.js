@@ -32,11 +32,8 @@ const createProduct = async (req, res, next) => {
 
 const findProduct = async(req, res, next) => {
   try {
-    // const product = await Product.find({}).populate('variants');
-    // res.send(product);
-    QRCode.toString('I am a pony!',{type:'terminal'}, function (err, url) {
-      console.log(url)
-    });
+    const product = await Product.find({}).populate('variants');
+    res.send(product);
   } catch (error) {
     next(error);
   }

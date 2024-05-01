@@ -4,10 +4,9 @@ const Category = require('../../models/categoryModel');
 
 const subCategory = async (req, res, next) => {
   try {
-    const { name, description } = req.body;
+    const { name, description, id } = req.body;
 
     // find category
-    const {id} = req.params;
     const findCategory = await Category.findById({ _id: id });
     if (!findCategory) {
       throw createHttpError(404, 'Category not found');
