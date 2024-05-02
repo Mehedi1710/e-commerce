@@ -15,7 +15,7 @@ const {
 const categoryHelper = express.Router();
 
 categoryHelper.post('/create-category', category);
-categoryHelper.post('/create-subcategory/:id', subCategory);
+categoryHelper.post('/create-subcategory', subCategory);
 categoryHelper.post('/categoryStatus', categoryStatus);
 categoryHelper.post('/subCategoryStatus', subCategoryStatus);
 categoryHelper.get('/getCategory', getCategory);

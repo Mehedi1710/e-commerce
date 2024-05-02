@@ -7,7 +7,10 @@ var QRCode = require('qrcode');
 const createProduct = async (req, res, next) => {
   try {
     const { name, description, store } = req.body;
-    const findStore = await Store.findOne({_id:store});
+    const findStore = await Store.findById({_id:store});
+    if(!findStore) {
+      throw createHttpError(400, 'Store does not exists with this id');
+    }
 
     const product = { name, description, store };
 

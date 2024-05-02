@@ -6,7 +6,7 @@ const {createVariant} = require('../controllers/productController/variantControl
 
 const merchantHelper = express.Router();
 
-merchantHelper.post('/becomemerchant/:id', createMerchant);
+merchantHelper.post('/becomemerchant', createMerchant);
 merchantHelper.post('/createProduct', createProduct);
 merchantHelper.post('/createVariant', uploadUserImage.single('image'), createVariant);
 merchantHelper.get('/findProduct', findProduct)
