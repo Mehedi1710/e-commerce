@@ -42,4 +42,18 @@ const findProduct = async(req, res, next) => {
   }
 }
 
-module.exports = {createProduct, findProduct};
+const deleteProduct = async(req, res, next) => {
+  try {
+    const {id} = req.body;
+    const product = await Product.findById({_id: id});
+    if(!product) {
+      throw createHttpError(404, 'Product not found');
+    }
+    await Product.findByIdAndDelete({_id: id});
+    res.send(product);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {createProduct, findProduct, deleteProduct};

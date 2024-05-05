@@ -28,4 +28,13 @@ const createMerchant = async (req, res, next) => {
   }
 };
 
-module.exports = createMerchant;
+const storeController = async(req, res, next) => {
+  try {
+    const data = await Store.find({});
+    res.send(data);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {createMerchant, storeController};
