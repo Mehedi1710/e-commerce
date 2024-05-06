@@ -32,4 +32,14 @@ const registration = async (req, res, next) => {
   }
 };
 
-module.exports = registration;
+
+const AllUsers = async(req, res, next) => {
+  try {
+    const data = await User.find({});
+    res.send(data);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {registration, AllUsers};

@@ -4,11 +4,11 @@ const subCategorySchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'Product name is required'],
+      required: [true, 'SubCategory name is required'],
     },
     description: {
       type: String,
-      required: [true, 'Product Description is required'],
+      required: [true, 'SubCategory Description is required'],
     },
     isActive: {
       type: Boolean,

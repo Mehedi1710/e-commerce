@@ -4,10 +4,10 @@ const Category = require('../../models/categoryModel');
 
 const subCategory = async (req, res, next) => {
   try {
-    const { name, description, id } = req.body;
+    const { name, description, category } = req.body;
 
     // find category
-    const findCategory = await Category.findById({ _id: id });
+    const findCategory = await Category.findById({ _id: category });
     if (!findCategory) {
       throw createHttpError(404, 'Category not found');
     };
@@ -43,10 +43,7 @@ const subCategory = async (req, res, next) => {
 const getSubCategory = async (req, res, next) => {
   try {
     const subCategory = await SubCategory.find({});
-    res.status(200).json({
-      message: 'Category get Successfully Done!',
-      payload: { subCategory },
-    });
+    res.send(subCategory);
   } catch (error) {
     next(error);
   }

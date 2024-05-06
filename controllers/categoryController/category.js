@@ -24,10 +24,7 @@ const category = async (req, res, next) => {
 const getCategory = async (req, res, next) => {
   try {
     const category = await Category.find({}).populate("subCategory");
-    res.status(200).json({
-      message: 'Category get Successfully Done!',
-      payload: { category },
-    });
+    res.send(category);
   } catch (error) {
     next(error);
   }
